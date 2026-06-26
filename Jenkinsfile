@@ -3,11 +3,12 @@ pipeline {
 
     stages {
 
-        stage('Clone') {
-            steps {
-                git 'https://github.com/Pavanclg/javaprjblood.git'
-            }
-        }
+       stage('Clone') {
+    steps {
+        git branch: 'main',
+            url: 'https://github.com/Pavanclg/javaprjblood.git'
+    }
+}
 
         stage('Build Backend Docker Image') {
             steps {
