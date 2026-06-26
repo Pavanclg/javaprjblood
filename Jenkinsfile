@@ -3,29 +3,27 @@ pipeline {
 
     stages {
 
-       stage('Clone') {
-    steps {
-        git branch: 'main',
-            url: 'https://github.com/Pavanclg/javaprjblood.git'
-    }
-}
-
         stage('Build Backend Docker Image') {
             steps {
-                sh 'cd backend && sudo docker build -t blood-backend .'
+                dir('backend') {
+                    sh 'docker build -t blood-backend .'
+                }
             }
         }
 
         stage('Build Frontend Docker Image') {
             steps {
-                sh 'cd frontend && sudo docker build -t blood-frontend .'
+                dir('frontend') {
+                    sh 'docker build -t blood-frontend .'
+                }
             }
         }
 
-        stage('Docker Images') {
+        stage('Show Docker Images') {
             steps {
-                sh 'sudo docker images'
+                sh 'docker images'
             }
         }
+
     }
 }
